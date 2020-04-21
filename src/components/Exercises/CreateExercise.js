@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from 'react-toastify';
 
 class CreateExercise extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class CreateExercise extends Component {
     }
 
     axios.post('http://localhost:5000/exercises/', exercise)
-      .then(res => console.log(res.data));
+      .then(res => toast(`Exercise ${res.data.description} created successfully!`));
 
     window.location = '/';
   }

@@ -7,11 +7,14 @@ import ListExercises from "../components/Exercises/ListExercises";
 import EditExercise from "../components/Exercises/EditExercise";
 import CreateExercise from "../components/Exercises/CreateExercise";
 import CreateUser from "../components/Users/CreateUser";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 function App() {
   return (
     <Router>
       <div className="container">
+        <ToastContainer />
         <Navbar />
         <br />
         <Route path="/" exact component={ListExercises} />

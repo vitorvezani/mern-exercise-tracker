@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 class CreateUser extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class CreateUser extends Component {
     }
 
     axios.post('http://localhost:5000/users/', user)
-      .then(res => console.log(res.data));
+      .then(res => toast(`User ${res.data.username} created successfully!`));
 
     this.setState({
       username: ''

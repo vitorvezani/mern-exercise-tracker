@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from 'react-toastify';
 
 class EditExercise extends Component {
   constructor(props) {
@@ -84,8 +85,8 @@ class EditExercise extends Component {
       date: this.state.date
     }
 
-    axios.put(`http://localhost:5000/exercises/${this.props.match.params.id, exercise}`)
-      .then(res => console.log(res.data));
+    axios.put(`http://localhost:5000/exercises/${this.props.match.params.id}`, exercise)
+    .then(res => toast(`Exercise ${res.data.description} updated successfully!`));
 
     window.location = '/';
   }

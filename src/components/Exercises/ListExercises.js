@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Exercise = props => (
   <tr>
@@ -9,7 +10,7 @@ const Exercise = props => (
     <td>{props.exercise.duration}</td>
     <td>{props.exercise.date.substring(0, 10)}</td>
     <td>
-      <Link to={`/edit/${props.exercise._id}`}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
+      <Link to={`/edit/${props.exercise._id}`}>edit</Link> | <a href="/" onClick={(e) => { e.preventDefault(); props.deleteExercise(props.exercise._id) }}>delete</a>
     </td>
   </tr>
 )
@@ -35,7 +36,7 @@ class ListExercises extends Component {
 
   deleteExercise(id) {
     axios.delete(`http://localhost:5000/exercises/${id}`)
-      .then(response => { console.log(response.data) });
+      .then(res => toast(`Exercise ${res.data.description} deleted successfully!`));
 
     this.setState({
       exercises: this.state.exercises.filter(el => el._id !== id)
@@ -43,8 +44,8 @@ class ListExercises extends Component {
   }
 
   exerciseList() {
-    return this.state.exercises.map(currentexercise => {
-      return <Exercise exercise={currentexercise} deleteExercise={this.deleteExercise} key={currentexercise._id} />;
+    return this.state.exercises.map(exercise => {
+      return <Exercise exercise={exercise} deleteExercise={this.deleteExercise} key={exercise._id} />;
     })
   }
 

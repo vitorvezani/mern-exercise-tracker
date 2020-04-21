@@ -16,7 +16,7 @@ router.route('/').post((req, res) => {
   const exercise = new Exercise({username, description, duration, date});
 
   exercise.save()
-  .then(() => res.json('Exercise added!'))
+  .then(() => res.json(exercise))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -28,7 +28,7 @@ router.route('/:id').get((req, res) => {
 
 router.route('/:id').delete((req, res) => {
   Exercise.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Exercise deleted.'))
+    .then(result => res.json(result))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -41,7 +41,7 @@ router.route('/:id').put((req, res) => {
       exercise.date = Date.parse(req.body.date);
 
       exercise.save()
-        .then(() => res.json('Exercise updated!'))
+        .then(() => res.json(exercise))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
