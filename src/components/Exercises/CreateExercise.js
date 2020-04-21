@@ -32,8 +32,8 @@ class CreateExercise extends Component {
           })
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(err => {
+        console.error(err);
       })
 
   }
@@ -71,8 +71,6 @@ class CreateExercise extends Component {
       duration: this.state.duration,
       date: this.state.date
     }
-
-    console.log(exercise);
 
     axios.post('http://localhost:5000/exercises/', exercise)
       .then(res => console.log(res.data));

@@ -23,7 +23,7 @@ class EditExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/exercises/' + this.props.match.params.id)
+    axios.get(`http://localhost:5000/exercises/${this.props.match.params.id}`)
       .then(response => {
         this.setState({
           username: response.data.username,
@@ -32,8 +32,8 @@ class EditExercise extends Component {
           date: new Date(response.data.date)
         })
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(err => {
+        console.error(err);
       })
 
     axios.get('http://localhost:5000/users/')
@@ -44,8 +44,8 @@ class EditExercise extends Component {
           })
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(err => {
+        console.error(err);
       })
 
   }
@@ -84,9 +84,7 @@ class EditExercise extends Component {
       date: this.state.date
     }
 
-    console.log(exercise);
-
-    axios.put('http://localhost:5000/exercises/' + this.props.match.params.id, exercise)
+    axios.put(`http://localhost:5000/exercises/${this.props.match.params.id, exercise}`)
       .then(res => console.log(res.data));
 
     window.location = '/';
