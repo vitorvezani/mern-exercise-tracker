@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import ExercisesList from './exercises-list.component';
 
 class EditExercise extends Component {
   constructor(props) {
@@ -152,4 +151,4 @@ class EditExercise extends Component {
   }
 }
 
-export default ExercisesList
+export default EditExercise

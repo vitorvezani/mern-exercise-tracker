@@ -14,7 +14,7 @@ const Exercise = props => (
   </tr>
 )
 
-class ExercisesList extends Component {
+class ListExercises extends Component {
   constructor(props) {
     super(props);
 
@@ -71,4 +71,4 @@ class ExercisesList extends Component {
   }
 }
 
-export default ExercisesList
+export default ListExercises
