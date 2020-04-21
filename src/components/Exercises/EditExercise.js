@@ -86,9 +86,10 @@ class EditExercise extends Component {
     }
 
     axios.put(`http://localhost:5000/exercises/${this.props.match.params.id}`, exercise)
-    .then(res => toast(`Exercise ${res.data.description} updated successfully!`));
-
-    window.location = '/';
+    .then(res => {
+      this.props.history.push('/');
+      toast(`Exercise ${res.data.description} updated successfully!`)
+    });
   }
 
   render() {

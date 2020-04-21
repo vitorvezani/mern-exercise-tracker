@@ -74,9 +74,10 @@ class CreateExercise extends Component {
     }
 
     axios.post('http://localhost:5000/exercises/', exercise)
-      .then(res => toast(`Exercise ${res.data.description} created successfully!`));
-
-    window.location = '/';
+      .then(res => {
+        this.props.history.push('/');
+        toast(`Exercise ${res.data.description} created successfully!`)
+      });
   }
 
   render() {

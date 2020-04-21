@@ -24,6 +24,7 @@
                     "className",
                     "children",
                     "location",
+                    "history",
                     "params",
                     "location*"
                 ]
