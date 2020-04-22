@@ -4,7 +4,8 @@ const passport = require('passport');
 const User = require('../../models/user.model');
 
 router.route('/').get((req, res) => {
-  res.render('index.ejs')
+  console.log(req.user)
+  res.render('index.ejs', {name: req.user.name})
 });
 
 router.route('/login').get((req, res) => {
