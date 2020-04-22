@@ -25,7 +25,7 @@ class ListExercises extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/exercises/')
+    axios.get('http://localhost:5000/api/exercises/')
       .then(response => {
         this.setState({ exercises: response.data })
       })
@@ -35,7 +35,7 @@ class ListExercises extends Component {
   }
 
   deleteExercise(id) {
-    axios.delete(`http://localhost:5000/exercises/${id}`)
+    axios.delete(`http://localhost:5000/api/exercises/${id}`)
       .then(res => toast(`Exercise ${res.data.description} deleted successfully!`));
 
     this.setState({

@@ -1,28 +1,31 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
+require('dotenv').config()
 
-require('dotenv').config();
+const express = require('express')
+const cors = require('cors')
 
-const app = express();
-const port = process.env.PORT || 5000;
+const path = require('path');
 
-app.use(cors());
-app.use(express.json());
+const app = express()
 
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log("MongoDB database connection established successfully");
-})
+require('./config/database-config')();
+require('./config/passport-config')(app);
 
-const exercisesRouter = require('./routes/exercises');
-const usersRouter = require('./routes/users');
+const port = process.env.PORT || 5000
 
-app.use('/exercises', exercisesRouter);
-app.use('/users', usersRouter);
+app.set('views', path.join(__dirname, '/routes/web/views'));
+app.set('view-engine', 'ejs')
+
+app.use(express.urlencoded({ extended: false}))
+app.use(cors())
+app.use(express.json())
+
+// WEB
+app.use('/', require('./routes/web/webapp'))
+
+// API
+app.use('/api/exercises', require('./routes/api/exercises'))
+app.use('/api/users', require('./routes/api/users'))
 
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port: ${port}`)
 });

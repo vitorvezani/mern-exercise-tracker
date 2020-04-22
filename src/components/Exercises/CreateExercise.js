@@ -24,7 +24,7 @@ class CreateExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/users/')
+    axios.get('http://localhost:5000/api/users/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -73,7 +73,7 @@ class CreateExercise extends Component {
       date: this.state.date
     }
 
-    axios.post('http://localhost:5000/exercises/', exercise)
+    axios.post('http://localhost:5000/api/exercises/', exercise)
       .then(res => {
         this.props.history.push('/');
         toast(`Exercise ${res.data.description} created successfully!`)

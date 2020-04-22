@@ -24,7 +24,7 @@ class EditExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/exercises/${this.props.match.params.id}`)
+    axios.get(`http://localhost:5000/api/exercises/${this.props.match.params.id}`)
       .then(response => {
         this.setState({
           username: response.data.username,
@@ -37,7 +37,7 @@ class EditExercise extends Component {
         console.error(err);
       })
 
-    axios.get('http://localhost:5000/users/')
+    axios.get('http://localhost:5000/api/users/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -85,7 +85,7 @@ class EditExercise extends Component {
       date: this.state.date
     }
 
-    axios.put(`http://localhost:5000/exercises/${this.props.match.params.id}`, exercise)
+    axios.put(`http://localhost:5000/api/exercises/${this.props.match.params.id}`, exercise)
     .then(res => {
       this.props.history.push('/');
       toast(`Exercise ${res.data.description} updated successfully!`)
