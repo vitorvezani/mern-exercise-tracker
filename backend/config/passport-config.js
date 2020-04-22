@@ -5,7 +5,7 @@ const User = require('../models/user.model')
 const flash = require('express-flash');
 const session = require('express-session');
 
-function initialize(app) {
+module.exports = (app) => {
   passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser))
   passport.serializeUser((user, done) => {
     console.log('user serialized: ' + user.id)
@@ -45,5 +45,3 @@ const authenticateUser = async (email, password, done) => {
     return done(err)
   }
 }
-
-module.exports = initialize
