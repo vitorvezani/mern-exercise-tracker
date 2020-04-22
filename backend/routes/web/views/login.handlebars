@@ -9,9 +9,9 @@
 
 <body>
 	<h1>Login</h1>
-	<% if(messages.error) { %>
-		<%= messages.error %>
-	<% } %>
+	{{#if messages.error }}
+		{{ messages.error }}
+	{{/if}}
 	<form action="/login" method="POST">
 		<div>
 			<label for="email">Email</label>

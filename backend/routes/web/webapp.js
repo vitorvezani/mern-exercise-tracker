@@ -5,11 +5,11 @@ const User = require('../../models/user.model');
 
 router.route('/').get((req, res) => {
   console.log(req.user)
-  res.render('index.ejs', {name: req.user.name})
+  res.render('index', {name: req.user.name})
 });
 
 router.route('/login').get((req, res) => {
-  res.render('login.ejs')
+  res.render('login')
 });
 
 router.route('/login').post(passport.authenticate('local', {
@@ -19,7 +19,7 @@ router.route('/login').post(passport.authenticate('local', {
 }));
 
 router.route('/register').get((req, res) => {
-  res.render('register.ejs')
+  res.render('register')
 });
 
 router.route('/register').post(async (req, res) => {
