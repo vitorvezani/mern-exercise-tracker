@@ -7,14 +7,14 @@ const session = require('express-session');
 
 module.exports = (app) => {
   passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser))
+  
   passport.serializeUser((user, done) => {
-    console.log('user serialized: ' + user.id)
     done(null, user.id)
    })
+
   passport.deserializeUser((id, done) => {
     User.findOne({ _id: id })
       .then(user => {
-        console.log('user deserialized: ' + user)
         done(null, user)
       })
       .catch(err => done(err))
