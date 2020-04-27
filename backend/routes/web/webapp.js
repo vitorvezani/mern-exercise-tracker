@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const User = require('../../models/user.model');
+const User = require('../../models/user/user');
 
 router.route('/').get((req, res) => {
   console.log(req.user)
-  res.render('index', {name: req.user.name})
+  res.render('index', { name: req.user.name })
 });
 
 router.route('/login').get((req, res) => {
@@ -22,11 +22,17 @@ router.route('/register').get((req, res) => {
   res.render('register')
 });
 
+
 router.route('/register').post(async (req, res) => {
+  const newUservalidationSchema = require('../../models/user/new_user_schema_validation')
   try {
+    const {error} = newUservalidationSchema.validate(req.body)
+    if(error)  {
+      console.error(error.details)
+      res.redirect('/register')
+    }
     const { name, password, username, email } = req.body
     const hashedPw = await bcrypt.hash(password, 10)
-
     await new User({ name, username, email, password: hashedPw }).save()
     res.redirect('/login')
   } catch (err) {
