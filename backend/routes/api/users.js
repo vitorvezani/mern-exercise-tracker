@@ -1,25 +1,34 @@
 const router = require('express').Router();
 const User = require('../../models/user/user');
-const { registerValidation } = require('../../models/user/user_validation')
+const { registerValidation, loginValidation } = require('../../models/user/user_validation')
 const bcrypt = require('bcrypt')
 
 router.route('/').get((req, res) => {
   User.find()
     .then(users => res.json(users))
-    .catch(err => res.status(400).json({error: err}));
+    .catch(err => res.status(400).json({error: err}))
 });
 
-router.route('/').post((req, res) => {
-  const username = req.body.username;
+router.route('/login').post(async (req, res) => {
+  const errors = loginValidation(req.body)
+  if(errors) return res.status(400).json({error: errors})
 
-  const newUser = new User({username});
+  const {email, password } = req.body
 
-  newUser.save()
-    .then(() => res.json(newUser))
-    .catch(err => res.status(400).json({error: err}));
+  try {
+    const user = await User.findOne({ email: email }).exec()
+    if (user == null) return res.status(400).json({error: 'Password or email incorrect'})
+    if (await bcrypt.compare(password, user.password)) {
+      return res.json(user)
+    } else {
+      return res.status(400).json({error: 'Password or email incorrect'})
+    }
+  } catch (err) {
+    return res.status(400).json({error: 'Password or email incorrect'})
+  }
 });
 
-router.route('/register').post(async (req, res) => {
+router.route('/').post(async (req, res) => {
   try {
     const errors = registerValidation(req.body)
     if (errors) return res.status(400).json({error: errors})

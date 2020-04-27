@@ -16,8 +16,29 @@ module.exports.registerValidation = (data) => {
       .email()
       .min(6)
       .required(),
-  }).with('password', 'repeat_password');
-  const {error} = schema.validate(data)
-  const messages =  error.details.map(error => error.message)
+  }).with('password', 'repeatPassword');
+  const { error } = schema.validate(data)
+
+  if(!error) return null
+
+  const messages = error.details.map(error => error.message)
+  return messages.length > 0 ? messages : null
+}
+
+module.exports.loginValidation = (data) => {
+  const schema = Joi.object({
+    email: Joi.string()
+      .email()
+      .min(6)
+      .required(),
+    password: Joi.string()
+      .min(8)
+      .required(),
+  });
+  const { error } = schema.validate(data)
+
+  if(!error) return null
+
+  const messages = error.details.map(error => error.message)
   return messages.length > 0 ? messages : null
 }
