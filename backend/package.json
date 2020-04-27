@@ -5,7 +5,8 @@
   "repository": "https://github.com/beaucarnes/mern-exercise-tracker-mongodb/tree/master/backend",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server"
+    "start": "nodemon server",
+    "debug": "nodemon server --inspect"
   },
   "keywords": [],
   "author": "",
