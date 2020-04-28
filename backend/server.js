@@ -16,6 +16,16 @@ app.use(express.json())
 
 require('./config/routers-config')(app);
 
+app.use(function (err, req, res, next) {
+  if(err) {
+    console.log(err.name)
+  }
+  if (err.name === 'UnauthorizedError') {
+    return res.status(err.status).json({code: err.code, error: err.message});
+  }
+  next()
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`)
 });
