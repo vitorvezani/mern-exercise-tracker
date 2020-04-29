@@ -1,8 +1,9 @@
+require('dotenv').config()
 const mongoose = require('mongoose')
 
-module.exports = () => {
+module.exports = async () => {
   const URI = process.env.ATLAS_URI
-  mongoose.connect(URI,
+  return await mongoose.connect(URI,
     { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
     () => console.log("MongoDB database connection established successfully"))
 }
