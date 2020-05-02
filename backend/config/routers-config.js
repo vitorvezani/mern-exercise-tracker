@@ -5,4 +5,5 @@ module.exports = (app) => {
   // API
   app.use('/api/exercises', require('../routes/api/exercises'))
   app.use('/api/users', require('../routes/api/users'))
+  app.use('/api/auth', require('../routes/api/auth'))
 }
