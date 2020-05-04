@@ -1,4 +1,5 @@
-require('dotenv').config()
+const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'
+require('dotenv').config({ path: envFile })
 
 const express = require('express')
 const cors = require('cors')
@@ -10,24 +11,24 @@ require('./config/view-engine-config')(app);
 
 const port = process.env.PORT || 5000
 
-app.use(express.urlencoded({ extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 app.use(express.json())
 
 require('./config/routers-config')(app);
 
 app.use(function (err, req, res, next) {
-  if(err) {
-    console.log(err.name)
+  if (err) {
+    console.error(err.name)
   }
   if (err.name === 'UnauthorizedError') {
-    return res.status(err.status).json({code: err.code, error: err.message});
+    return res.status(err.status).json({ code: err.code, error: err.message });
   }
   next()
 });
 
-app.listen(port, () => {
+const appServer = app.listen(port, () => {
   console.log(`Server is running on port: ${port}`)
 });
 
-module.exports = app
+module.exports = appServer

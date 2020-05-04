@@ -5,7 +5,6 @@ const User = require('../../models/user/user');
 const { registerValidation } = require('../../models/user/user_validation')
 
 router.route('/').get((req, res) => {
-  console.log(req.user)
   res.render('index', { name: req.user.name })
 });
 
