@@ -6,5 +6,8 @@ module.exports = async () => {
   console.log(`Database configured with URI: ${URI}`)
   return await mongoose.connect(URI,
     { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
-    () => console.log('MongoDB database connection established successfully'))
+    (err) => {
+      if(err) console.log(err)
+      else console.log('MongoDB database connection established successfully')
+    } )
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { handleError } from '../Common/error_handler';
 import { toast } from 'react-toastify';
 
 const Exercise = props => (
@@ -30,7 +31,7 @@ class ListExercises extends Component {
         this.setState({ exercises: response.data })
       })
       .catch(err => {
-        toast.error(`Operation failed: ${err.message}`)
+        handleError(err)
       })
   }
 
@@ -38,7 +39,7 @@ class ListExercises extends Component {
     axios.delete(`http://localhost:5000/api/exercises/${id}`)
       .then(res => toast(`Exercise ${res.data.description} deleted successfully!`))
       .catch(err => {
-        toast.error(`Operation failed: ${err.message}`)
+        handleError(err)
       })
 
     this.setState({

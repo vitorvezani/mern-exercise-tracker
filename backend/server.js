@@ -1,6 +1,8 @@
 const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'
 require('dotenv').config({ path: envFile })
 
+const errorHandler = require('./utils/error_handler')
+
 const express = require('express')
 const cors = require('cors')
 const app = express()
@@ -17,15 +19,7 @@ app.use(express.json())
 
 require('./config/routers-config')(app);
 
-app.use(function (err, req, res, next) {
-  if (err) {
-    console.error(err.name)
-  }
-  if (err.name === 'UnauthorizedError') {
-    return res.status(err.status).json({ code: err.code, error: err.message });
-  }
-  next()
-});
+app.use(errorHandler);
 
 const appServer = app.listen(port, () => {
   console.log(`Server is running on port: ${port}`)

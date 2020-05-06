@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { handleError } from '../Common/error_handler';
 import { toast } from 'react-toastify';
 
 class EditExercise extends Component {
@@ -34,7 +35,7 @@ class EditExercise extends Component {
         })
       })
       .catch(err => {
-        toast.error(`Operation failed: ${err.message}`)
+        handleError(err)
       })
 
     axios.get('http://localhost:5000/api/users/')
@@ -46,7 +47,7 @@ class EditExercise extends Component {
         }
       })
       .catch(err => {
-        toast.error(`Operation failed: ${err.message}`)
+        handleError(err)
       })
 
   }
@@ -91,7 +92,7 @@ class EditExercise extends Component {
       toast(`Exercise ${res.data.description} updated successfully!`)
     })
     .catch(err => {
-      toast.error(`Operation failed: ${err.message}`)
+      handleError(err)
     })
   }
 

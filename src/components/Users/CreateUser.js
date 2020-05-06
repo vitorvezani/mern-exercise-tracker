@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { handleError } from '../Common/error_handling';
+import { handleError } from '../Common/error_handler';
 
 class CreateUser extends Component {
   constructor(props) {
