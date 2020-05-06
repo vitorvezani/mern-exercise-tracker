@@ -34,7 +34,7 @@ class EditExercise extends Component {
         })
       })
       .catch(err => {
-        console.error(err);
+        toast.error(`Operation failed: ${err.message}`)
       })
 
     axios.get('http://localhost:5000/api/users/')
@@ -46,7 +46,7 @@ class EditExercise extends Component {
         }
       })
       .catch(err => {
-        console.error(err);
+        toast.error(`Operation failed: ${err.message}`)
       })
 
   }
@@ -89,7 +89,10 @@ class EditExercise extends Component {
     .then(res => {
       this.props.history.push('/');
       toast(`Exercise ${res.data.description} updated successfully!`)
-    });
+    })
+    .catch(err => {
+      toast.error(`Operation failed: ${err.message}`)
+    })
   }
 
   render() {

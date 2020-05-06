@@ -34,9 +34,8 @@ class CreateExercise extends Component {
         }
       })
       .catch(err => {
-        console.error(err);
+        toast.error(`Operation failed: ${err.message}`)
       })
-
   }
 
   onChangeUsername(e) {
@@ -77,7 +76,10 @@ class CreateExercise extends Component {
       .then(res => {
         this.props.history.push('/');
         toast(`Exercise ${res.data.description} created successfully!`)
-      });
+      })
+      .catch(err => {
+        toast.error(`Operation failed: ${err.message}`)
+      })
   }
 
   render() {

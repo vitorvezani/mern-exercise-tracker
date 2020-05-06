@@ -28,7 +28,10 @@ class CreateUser extends Component {
     }
 
     axios.post('http://localhost:5000/api/users/', user)
-      .then(res => toast(`User ${res.data.username} created successfully!`));
+      .then(res => toast(`User ${res.data.username} created successfully!`))
+      .catch(err => {
+        toast.error(`Operation failed: ${err.message}`)
+      })
 
     this.setState({
       username: ''

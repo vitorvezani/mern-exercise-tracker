@@ -30,13 +30,16 @@ class ListExercises extends Component {
         this.setState({ exercises: response.data })
       })
       .catch(err => {
-        console.error(err);
+        toast.error(`Operation failed: ${err.message}`)
       })
   }
 
   deleteExercise(id) {
     axios.delete(`http://localhost:5000/api/exercises/${id}`)
-      .then(res => toast(`Exercise ${res.data.description} deleted successfully!`));
+      .then(res => toast(`Exercise ${res.data.description} deleted successfully!`))
+      .catch(err => {
+        toast.error(`Operation failed: ${err.message}`)
+      })
 
     this.setState({
       exercises: this.state.exercises.filter(el => el._id !== id)
