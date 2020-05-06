@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api  from '../Common/api';
 import { toast } from 'react-toastify';
 import { handleError } from '../Common/error_handler';
 
@@ -64,7 +64,7 @@ class CreateUser extends Component {
       repeatPassword: this.state.repeatPassword
     }
 
-    axios.post('http://localhost:5000/api/auth/register', user)
+    api.post('/api/auth/register', user)
       .then(res => toast(`User ${res.data.username} created successfully!`))
       .catch(err => handleError(err))
   }

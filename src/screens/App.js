@@ -18,9 +18,12 @@ function App() {
         <Navbar />
         <br />
         <Route path="/" exact component={ListExercises} />
-        <Route path="/edit/:id" component={EditExercise} />
-        <Route path="/create" component={CreateExercise} />
-        <Route path="/user" component={CreateUser} />
+        <Route path="/exercises" exact component={ListExercises} />
+        <Route path="/exercises/edit/:id" component={EditExercise} />
+        <Route path="/exercises/create" component={CreateExercise} />
+        <Route path="/users/create" component={CreateUser} />
+        <p><small>You are running this application in <b>{process.env.NODE_ENV}</b> mode</small></p>
+        <p><small>Public URL is: <b>{process.env.PUBLIC_URL}</b></small></p>
       </div>
     </Router>
   );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api  from '../Common/api';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { handleError } from '../Common/error_handler';
@@ -25,7 +25,7 @@ class EditExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/api/exercises/${this.props.match.params.id}`)
+    api.get(`/api/exercises/${this.props.match.params.id}`)
       .then(response => {
         this.setState({
           username: response.data.username,
@@ -38,7 +38,7 @@ class EditExercise extends Component {
         handleError(err)
       })
 
-    axios.get('http://localhost:5000/api/users/')
+    api.get('/api/users/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -86,7 +86,7 @@ class EditExercise extends Component {
       date: this.state.date
     }
 
-    axios.put(`http://localhost:5000/api/exercises/${this.props.match.params.id}`, exercise)
+    api.put(`/api/exercises/${this.props.match.params.id}`, exercise)
     .then(res => {
       this.props.history.push('/');
       toast(`Exercise ${res.data.description} updated successfully!`)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api  from '../Common/api';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { handleError } from '../Common/error_handler';
@@ -25,7 +25,7 @@ class CreateExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/api/users/')
+    api.get('/api/users/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -73,7 +73,7 @@ class CreateExercise extends Component {
       date: this.state.date
     }
 
-    axios.post('http://localhost:5000/api/exercises/', exercise)
+    api.post('/api/exercises/', exercise)
       .then(res => {
         this.props.history.push('/');
         toast(`Exercise ${res.data.description} created successfully!`)

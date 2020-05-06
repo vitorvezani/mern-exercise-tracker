@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api  from '../Common/api';
 import { handleError } from '../Common/error_handler';
 import { toast } from 'react-toastify';
 
@@ -26,7 +26,7 @@ class ListExercises extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/api/exercises/')
+    api.get('/api/exercises/')
       .then(response => {
         this.setState({ exercises: response.data })
       })
@@ -36,7 +36,7 @@ class ListExercises extends Component {
   }
 
   deleteExercise(id) {
-    axios.delete(`http://localhost:5000/api/exercises/${id}`)
+    api.delete(`/api/exercises/${id}`)
       .then(res => toast(`Exercise ${res.data.description} deleted successfully!`))
       .catch(err => {
         handleError(err)
