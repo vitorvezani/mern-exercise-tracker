@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "express-flash": "^0.0.2",
     "express-handlebars": "^4.0.3",
-    "express-jwt": "^5.3.3",
+    "express-jwt": "^6.0.0",
     "express-session": "^1.17.1",
     "migrate": "^1.6.2",
     "mongoose": "^5.9.10",
